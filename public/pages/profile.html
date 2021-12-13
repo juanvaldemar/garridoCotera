@@ -311,7 +311,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="user_mail" placeholder="Email">
+      <input type="email" class="form-control" id="user_email" placeholder="Email">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Contraseña</label>
@@ -347,8 +347,9 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Registrar</button>
 </form>
+  <button onclick="guardassr()">Subir</button>
+
   </div>
 </div>
     
@@ -391,7 +392,6 @@
 </body>
 
 
-<script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-SERVICE.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
@@ -399,92 +399,39 @@
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
 
 
-<script>
-   $("#file").on("change", function(event){
-    selectedFile = event.target.files[0];
-  });
-</script>
+ 
 
 <script>
- 
  
  var firebaseConfig = {
-    apiKey: "AIzaSyAJq5u7zhRCMRRGjlONw_hf3TPJQCK5tEE",
-    authDomain: "cotera.firebaseapp.com",
-    projectId: "cotera",
-    storageBucket: "cotera.appspot.com",
-    messagingSenderId: "616698846524",
-    databaseURL: "https://cotera-default-rtdb.firebaseio.com/",
-    appId: "1:616698846524:web:e400234650945fdee51239"
-  };
-
-
-  // Initialize Firebase
+  apiKey: "AIzaSyDNAAjah5rM2l8qxC6ukYLBjqCvRWmXF-E",
+  authDomain: "sayra-ab436.firebaseapp.com",
+  databaseURL: "https://sayra-ab436-default-rtdb.firebaseio.com",
+  projectId: "sayra-ab436",
+  storageBucket: "sayra-ab436.appspot.com",
+  messagingSenderId: "194260169989",
+  appId: "1:194260169989:web:166a6d2094f121b999736c"
+};
+ 
   firebase.initializeApp(firebaseConfig);
   console.log(firebase);
 
-  function uploadImage() {
-    const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo").files[0];
-    const name = +new Date() + "-" + file.name;
-
-    const metadata = {
-      contentType: file.type
-    };
-
-    const task = ref.child(name).put(file, metadata);
-    task
-      .then(snapshot => snapshot.ref.getDownloadURL())
-      .then(url => {
-        console.log("imagen: " + url);
-        guardassr(url);
-        //document.querySelector("#image").src = url;
-
-      })
-      .catch(console.error);
-  }
-  
-  function guardassr(url) {
+  function guardassr() {
     var database = firebase.database();
-    var messageListRef = firebase.database().ref('PetDog');
+    var messageListRef = firebase.database().ref('users');
     var newMessageRef = messageListRef.push();
 
-
-
-    var nombre = document.getElementById('nombre').value;
-    var edad = document.getElementById('edad').value;
-
-
-    var e1 = document.getElementById("select1");
-    var category1 = e1.options[e1.selectedIndex].text;
-
-    var e2 = document.getElementById("select2");
-    var category2 = e2.options[e2.selectedIndex].text;
-
-
-    var e3 = document.getElementById("select3");
-    var category3 = e3.options[e3.selectedIndex].text;
-
-
-    if (nombre != null) {
+    var nombre = document.getElementById('user_email').value;
+    var password = document.getElementById('user_password').value;
+   
       newMessageRef.set({
-        'nombre': nombre,
-        'url': url,
-        'edad': edad,
-        'tipo': category1,
-        'raza': category2,
-        'tamanio': category3,
-
+        'nombre': nombre, 
+        'password': password, 
       });
-  alert("La información se cargó correctamente")
-    } else {
-      alert("PF NO OLVIDES LA DESCRIPCIÓN !!!!!!!!!!!")
-    }
+      console.log("La información se cargó correctamente: "+nombre)
+ 
 
   }
-
-//busca_user();
-
 
 </script>
 
