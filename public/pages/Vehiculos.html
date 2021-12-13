@@ -243,9 +243,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Crear Usuario</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Crear Vehiculo</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Crear Usuario</h6>
+          <h6 class="font-weight-bolder mb-0">Crear Vehiculo</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -294,39 +294,19 @@
     <form>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="user_email" placeholder="Email">
+      <label for="inputPlaca">PLaca</label>
+      <input type="text" class="form-control" id="vehiculo_placa" placeholder="ASS454">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Contraseña</label>
-      <input type="password" class="form-control" id="user_password" placeholder="Password">
+      <label for="inputMarca">Marca</label>
+      <input type="text" class="form-control" id="vehiculo_marca" placeholder="Volvo">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputAddress">Direccion</label>
-    <input type="text" class="form-control" id="user_address" placeholder="1234 Main St">
+    <label for="inputAño">Año de fabricación</label>
+    <input type="number" class="form-control" id="vehiculo_año" placeholder="1990">
   </div>  
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">Ciudad</label>
-      <input type="text" class="form-control" id="user_city">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">Distrito</label>
-      <select id="user_distrito" class="form-control">
-        <option selected>Ingrese su distrito</option>
-        <option>...</option>
-      </select>
-    </div>    
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Ingrese su distrito
-      </label>
-    </div>
-  </div>
+  
 </form>
   <button onclick="guardassr()">Subir</button>
 
@@ -398,21 +378,18 @@
 
   function guardassr() {
     var database = firebase.database();
-    var messageListRef = firebase.database().ref('users');
+    var messageListRef = firebase.database().ref('vehiculos');
     var newMessageRef = messageListRef.push();
 
-    var nombre = document.getElementById('user_email').value;
-    var password = document.getElementById('user_password').value;
-    var address = document.getElementById('user_distrito').value;
-    var city = document.getElementById('user_city').value;
-    var distrito= document.getElementById('user_distrito'),value;
-   
+    var Placa = document.getElementById('vehiculo_placa').value;
+    var Marca = document.getElementById('vehiculo_marca').value;
+    var Año = document.getElementById('vehiculo_año').value;
+    
       newMessageRef.set({
-        'nombre': nombre, 
-        'password': password,
-        'address': address,
-        'city': city,
-        'distrito':distrito,
+        'Placa': Placa, 
+        'Marca': Marca,
+        'Año': Año,
+        
       });
       console.log("La información se cargó correctamente: "+address)
  

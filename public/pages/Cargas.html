@@ -294,39 +294,18 @@
     <form>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="user_email" placeholder="Email">
+      <label for="inputTipo">Tipo</label>
+      <input type="text" class="form-control" id="carga_tipo" placeholder="Solido">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Contraseña</label>
-      <input type="password" class="form-control" id="user_password" placeholder="Password">
+      <label for="inputCarga">Carga</label>
+      <input type="text" class="form-control" id="carga_carga" placeholder="Gasolina">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputAddress">Direccion</label>
-    <input type="text" class="form-control" id="user_address" placeholder="1234 Main St">
-  </div>  
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">Ciudad</label>
-      <input type="text" class="form-control" id="user_city">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">Distrito</label>
-      <select id="user_distrito" class="form-control">
-        <option selected>Ingrese su distrito</option>
-        <option>...</option>
-      </select>
-    </div>    
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Ingrese su distrito
-      </label>
-    </div>
-  </div>
+    <label for="inputPrecio">Precio por kilometros</label>
+    <input type="number" class="form-control" id="carga_precio" placeholder="1234 Main St">
+  </div>    
 </form>
   <button onclick="guardassr()">Subir</button>
 
@@ -398,23 +377,21 @@
 
   function guardassr() {
     var database = firebase.database();
-    var messageListRef = firebase.database().ref('users');
+    var messageListRef = firebase.database().ref('carga');
     var newMessageRef = messageListRef.push();
 
-    var nombre = document.getElementById('user_email').value;
-    var password = document.getElementById('user_password').value;
-    var address = document.getElementById('user_distrito').value;
-    var city = document.getElementById('user_city').value;
-    var distrito= document.getElementById('user_distrito'),value;
+    var Tipo = document.getElementById('carga_tipo').value;
+    var Carga = document.getElementById('carga_carga').value;
+    var Precio = document.getElementById('carga_precio').value;
+   
    
       newMessageRef.set({
-        'nombre': nombre, 
-        'password': password,
-        'address': address,
-        'city': city,
-        'distrito':distrito,
+        'tipo': Tipo, 
+        'carga': Carga,
+        'precio': precio,
+        
       });
-      console.log("La información se cargó correctamente: "+address)
+      console.log("La información se cargó correctamente: "+carga)
  
 
   }

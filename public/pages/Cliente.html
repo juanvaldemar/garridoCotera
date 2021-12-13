@@ -243,9 +243,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Crear Usuario</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Crear Cliente</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Crear Usuario</h6>
+          <h6 class="font-weight-bolder mb-0">Crear Cliente</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -294,26 +294,30 @@
     <form>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="user_email" placeholder="Email">
+      <label for="inputEmail">RUC</label>
+      <input type="number" class="form-control" id="cliente_ruc" placeholder="RUC">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Contraseña</label>
-      <input type="password" class="form-control" id="user_password" placeholder="Password">
+      <label for="inputCliente">Cliente</label>
+      <input type="text" class="form-control" id="cliente_Cliente" placeholder="Cliente">
     </div>
   </div>
   <div class="form-group">
     <label for="inputAddress">Direccion</label>
-    <input type="text" class="form-control" id="user_address" placeholder="1234 Main St">
+    <input type="text" class="form-control" id="cliente_address" placeholder="1234 Main St">
   </div>  
+   <div class="form-group col-md-6">
+      <label for="inputEmail">coordenada</label>
+      <input type="text" class="form-control" id="cliente_ruc" placeholder="coordenada">
+    </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Ciudad</label>
-      <input type="text" class="form-control" id="user_city">
+      <input type="text" class="form-control" id="cliente_city">
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">Distrito</label>
-      <select id="user_distrito" class="form-control">
+      <select id="cliente_distrito" class="form-control">
         <option selected>Ingrese su distrito</option>
         <option>...</option>
       </select>
@@ -398,18 +402,18 @@
 
   function guardassr() {
     var database = firebase.database();
-    var messageListRef = firebase.database().ref('users');
+    var messageListRef = firebase.database().ref('cliente');
     var newMessageRef = messageListRef.push();
 
-    var nombre = document.getElementById('user_email').value;
-    var password = document.getElementById('user_password').value;
-    var address = document.getElementById('user_distrito').value;
-    var city = document.getElementById('user_city').value;
-    var distrito= document.getElementById('user_distrito'),value;
+    var RUC = document.getElementById('cliente_ruc').value;
+    var cliente = document.getElementById('cliente_Cliente').value;
+    var address = document.getElementById('cliente_distrito').value;
+    var city = document.getElementById('cliente_city').value;
+    var distrito= document.getElementById('cliente_distrito'),value;
    
       newMessageRef.set({
-        'nombre': nombre, 
-        'password': password,
+        'RUC': RUC, 
+        'nombre': cliente,
         'address': address,
         'city': city,
         'distrito':distrito,
