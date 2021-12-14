@@ -313,7 +313,33 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Ciudad</label>
-      <input type="text" class="form-control" id="cliente_city">
+      <select id="cliente_city" class="form-control">
+        <option selected>Ingrese su distrito</option>        
+        <option value="1"> Amazonas</option>
+        <option value="2"> Áncash</option>
+        <option value="3"> Apurímac</option>
+        <option value="4"> Arequipa</option>
+        <option value="5"> Ayacucho</option>
+        <option value="6"> Cajamarca</option>
+        <option value="7"> Cusco</option>
+        <option value="8"> Huancavelica</option>
+        <option value="9"> Huánuco</option>
+        <option value="10"> Ica</option>
+        <option value="11"> Junín</option>
+        <option value="12"> La Libertad</option>
+        <option value="13"> Lambayeque</option>
+        <option value="14"> Lima</option>
+        <option value="15"> Loreto</option>
+        <option value="16"> Madre de Dios</option>
+        <option value="17"> Moquegua</option>
+        <option value="18"> Pasco</option>
+        <option value="19"> Piura</option>
+        <option value="20"> Puno</option>
+        <option value="21"> San Martín</option>
+        <option value="22"> Tacna</option>
+        <option value="23"> Tumbes</option>
+        <option value="24"> Ucayali</option>
+      </select>
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">Distrito</label>
@@ -418,7 +444,7 @@
         'city': city,
         'distrito':distrito,
       });
-      console.log("La información se cargó correctamente: "+address)
+      console.log("La información se cargó correctamente: "+cliente)
  
 
   }

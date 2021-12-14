@@ -301,6 +301,10 @@
       <label for="inputMarca">Marca</label>
       <input type="text" class="form-control" id="vehiculo_marca" placeholder="Volvo">
     </div>
+    <div class="form-group col-md-6">
+      <label for="inputModelo">Modelo</label>
+      <input type="text" class="form-control" id="vehiculo_modelo" placeholder="atrios">
+    </div>
   </div>
   <div class="form-group">
     <label for="inputAño">Año de fabricación</label>
@@ -383,15 +387,17 @@
 
     var Placa = document.getElementById('vehiculo_placa').value;
     var Marca = document.getElementById('vehiculo_marca').value;
-    var Año = document.getElementById('vehiculo_año').value;
+    var Modelo = document.getElementById('vehiculo_modelo').value;
+    var Año = document.getElementById('vehiculo_año').value
     
       newMessageRef.set({
         'Placa': Placa, 
         'Marca': Marca,
         'Año': Año,
+        'Modelo': Modelo,
         
       });
-      console.log("La información se cargó correctamente: "+address)
+      console.log("La información se cargó correctamente: "+Placa)
  
 
   }
