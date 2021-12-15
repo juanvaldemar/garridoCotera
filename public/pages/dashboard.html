@@ -289,7 +289,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Ventas del mes</p>
                     <h5 class="font-weight-bolder mb-0" id="ventas_mes">
-                      $53,000
+                      Cargando...
                       <span class="text-success text-sm font-weight-bolder">+55%</span>
                     </h5>
                   </div>
@@ -310,8 +310,8 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Incremento de carga</p>
-                    <h5 class="font-weight-bolder mb-0">
-                      2,300
+                    <h5 class="font-weight-bolder mb-0" id="incre_carga">
+                        Cargando...
                       <span class="text-success text-sm font-weight-bolder">+3%</span>
                     </h5>
                   </div>
@@ -332,8 +332,8 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Nuevos Clientes</p>
-                    <h5 class="font-weight-bolder mb-0">
-                      +3,462
+                    <h5 class="font-weight-bolder mb-0" id="nuevos_clientes">
+                      Cargando...
                       <span class="text-danger text-sm font-weight-bolder">-2%</span>
                     </h5>
                   </div>
@@ -354,8 +354,8 @@
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Cargas Realizadas</p>
-                    <h5 class="font-weight-bolder mb-0">
-                      $103,430
+                    <h5 class="font-weight-bolder mb-0" id="carga_realizada">
+                      Cargando...
                       <span class="text-success text-sm font-weight-bolder">+5%</span>
                     </h5>
                   </div>
@@ -982,8 +982,100 @@
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/chartjs.min.js"></script>
+ 
   <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-SERVICE.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+
+<script>
+      var firebaseConfig = {
+      apiKey: "AIzaSyAJq5u7zhRCMRRGjlONw_hf3TPJQCK5tEE",
+      authDomain: "cotera.firebaseapp.com",
+      projectId: "cotera",
+      storageBucket: "cotera.appspot.com",
+      messagingSenderId: "616698846524",
+      databaseURL: "https://sayra-ab436-default-rtdb.firebaseio.com/",
+      appId: "1:616698846524:web:e400234650945fdee51239"
+    };
+
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
+  busca_user();
+
+    function busca_user() {
+
+
+
+
+      var db = firebase.database();
+      var ref = db.ref("dashboard");
+      var ref2 = db.ref("b");
+      var ref3 = db.ref("c");
+      var ref4 = db.ref("d");
+      var reporte = db.ref("reporte");
+
+      var ventas_mes = document.getElementById("ventas_mes");
+      var  incre_carga = document.getElementById("incre_carga");
+      var  nuevos_clientes = document.getElementById("nuevos_clientes");
+      var  carga_realizada = document.getElementById("carga_realizada");
+
+          var ctx = document.getElementById("chart-bars").getContext("2d");
+
+      //limpia la tabla
+      ventas_mes.innerHTML = "";
+      incre_carga.innerHTML = "";
+      nuevos_clientes.innerHTML = "";
+      carga_realizada.innerHTML = "";
+
+ 
+      // Retrieve new posts as they are added to our database
+      ref.on('child_added', (snapshot, prevChildKey) => {
+        const newPost = snapshot.val();
+        ventas_mes.innerHTML = "" +newPost.nombre;
+      });
+
+    // Retrieve new posts as they are added to our database
+      ref2.on('child_added', (snapshot, prevChildKey) => {
+        const newPost = snapshot.val();
+        incre_carga.innerHTML = "" +newPost.nombre;
+      });
+    
+     // Retrieve new posts as they are added to our database
+      ref3.on('child_added', (snapshot, prevChildKey) => {
+        const newPost = snapshot.val();
+        nuevos_clientes.innerHTML = "" +newPost.nombre;
+      });
+    
+         // Retrieve new posts as they are added to our database
+      ref4.on('child_added', (snapshot, prevChildKey) => {
+        const newPost = snapshot.val();
+        carga_realizada.innerHTML = "" +newPost.nombre;
+      });
+
+      // Retrieve new posts as they are added to our database
+      reporte.on('child_added', (snapshot, prevChildKey) => {
+        const newPost = snapshot.val();
+        carga_realizada.innerHTML = "" +newPost.nombre;
+
+
+
 
     new Chart(ctx, {
       type: "bar",
@@ -1067,9 +1159,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayor", "Junior", "Julio", "Agosto", "Septiembre"],
         datasets: [{
-            label: "Mobile apps",
+            label: newPost.titulo+"",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -1077,22 +1169,10 @@
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            data: [newPost.numero, newPost.numero+20, newPost.numero+50, newPost.numero+70, newPost.numero-120, newPost.numero+100, newPost.numero+20, newPost.numero+700, newPost.numero+100],
             maxBarThickness: 6
 
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
+          } 
         ],
       },
       options: {
@@ -1151,92 +1231,17 @@
         },
       },
     });
-  </script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
 
 
-    <table >
-              <thead style="background-color: red;">
-                <div >
-                      <tr class="col-sm-4 text-center">
-                        <th style="color:white">nombre</th> <br>
-                      </tr>
-                </div>
-              
-              </thead>
-              <tbody id="tabla" class="row">
-              </tbody>
-            </table>
-
-
-
-  <script src="https://www.gstatic.com/firebasejs/9.4.0/firebase-SERVICE.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
-
-
-<script>
-      var firebaseConfig = {
-      apiKey: "AIzaSyAJq5u7zhRCMRRGjlONw_hf3TPJQCK5tEE",
-      authDomain: "cotera.firebaseapp.com",
-      projectId: "cotera",
-      storageBucket: "cotera.appspot.com",
-      messagingSenderId: "616698846524",
-      databaseURL: "https://sayra-ab436-default-rtdb.firebaseio.com/",
-      appId: "1:616698846524:web:e400234650945fdee51239"
-    };
-
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    console.log(firebase);
-  busca_user();
-
-    function busca_user() {
-
-
-
-
-      var db = firebase.database();
-      var ref = db.ref("dashboard");
-
-      var table = document.getElementById("ventas_mes");
-
-      //limpia la tabla
-      table.innerHTML = "";
-
-      //con esta función recorre todos los datos almacenados en FB ordenados por mi child(tipo)
-
-      var ListaEdades = [];
- 
-
-      // Retrieve new posts as they are added to our database
-      ref.on('child_added', (snapshot, prevChildKey) => {
-        const newPost = snapshot.val();
-        table.innerHTML = "" +newPost.nombre;
-        console.log('Author: ' + newPost.nombre);
       });
 
 
 
 
 
-      function imprimir() {
-        console.log("listaEdades: " + ListaEdades);
-      }
 
-    
+
+
     }
 
 
